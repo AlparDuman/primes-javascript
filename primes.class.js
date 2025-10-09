@@ -19,4 +19,18 @@
 
 class Primes {
 
+    constructor() { }
+
+    isPrime(number) { }
+
+    countPrimes(range, start = 0) { }
+
+    getPrimes(range, start = 0) { }
+
+    selfTest() { }
+
+    #generateSmallPrimes(range) { }
+
+    static BitArray = class { }
+    
 }
