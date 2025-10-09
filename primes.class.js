@@ -27,7 +27,14 @@ class Primes {
         this.#smallPrimesLast = this.#smallPrimes.at(-1);
     }
 
-    isPrime(number) { }
+    isPrime(number) {
+        if (!Number.isInteger(number) || number < 2)
+            return false;
+        for (const prime of this.#smallPrimes)
+            if (number % prime == 0)
+                return number == prime;
+        return true;
+    }
 
     countPrimes(range, start = 0) { }
 
