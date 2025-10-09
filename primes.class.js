@@ -19,7 +19,13 @@
 
 class Primes {
 
-    constructor() { }
+    #smallPrimes;
+    #smallPrimesLast;
+
+    constructor() {
+        this.#smallPrimes = this.#generateSmallPrimes(Number.MAX_SAFE_INTEGER);
+        this.#smallPrimesLast = this.#smallPrimes.at(-1);
+    }
 
     isPrime(number) { }
 
@@ -29,7 +35,35 @@ class Primes {
 
     selfTest() { }
 
-    #generateSmallPrimes(range) { }
+    #generateSmallPrimes(range) {
+        const timeStart = performance.now();
+
+        range = Math.floor(Math.sqrt(range));
+        const field = new Primes.BitArray(range);
+        const limit = Math.floor(Math.sqrt(range));
+        let primes = [];
+        let number = 7;
+
+        if (range >= 2) primes.push(2);
+        if (range >= 3) primes.push(3);
+        if (range >= 5) primes.push(5);
+
+        for (; number <= limit; number += 2)
+            if (field.get(number)) {
+                primes.push(number);
+                const step = number * 2;
+                for (let multiple = number + step; multiple <= range; multiple += step)
+                    field.set(multiple);
+            }
+
+        for (; number <= range; number += 2)
+            if (field.get(number))
+                primes.push(number);
+
+        const timeEnd = performance.now();
+        console.log(`Prepared ${primes.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
+        return primes;
+    }
 
     static BitArray = class {
 
