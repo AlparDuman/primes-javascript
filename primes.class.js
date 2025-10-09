@@ -36,7 +36,9 @@ class Primes {
         return true;
     }
 
-    countPrimes(range, start = 0) { }
+    countPrimes(range, start = 0) {
+        return this.getPrimes(range, start).length;
+    }
 
     getPrimes(range, start = 0) { }
 
