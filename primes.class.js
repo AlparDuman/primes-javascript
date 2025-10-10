@@ -52,7 +52,77 @@ class Primes {
         return primes;
     }
 
-    selfTest() { }
+    selfTest() {
+
+        function isPrimeTest(number) {
+            if (!Number.isInteger(number) || number < 2 || number != 2 && number % 2 == 0)
+                return false;
+            const limit = Math.floor(Math.sqrt(number));
+            for (let divisor = 3; divisor <= limit; divisor += 2)
+                if (number % divisor == 0)
+                    return false;
+            return true;
+        }
+
+        function countPrimesTest(range, start = 0) {
+            return getPrimesTest(range, start);
+        }
+
+        function getPrimesTest(range, start = 0) {
+            if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
+                return [];
+            const end = start + range;
+            let primes = start <= 2 && end >= 2 ? [2] : [];
+            for (let number = start % 2 == 1 ? start : ++start; number <= end; number += 2)
+                if (isPrimeTest(number))
+                    primes.push(number);
+            return primes;
+        }
+
+
+
+        console.log('[Primes] Self testing ...');
+        const start = 0;
+        const range = 1e5;
+        const results = { isPrime: [], isPrimeTest: [], countPrimes: 0, countPrimeTest: 0, getPrimes: [], getPrimesTest: [] };
+
+
+        let timeStart = performance.now();
+        for (let number = start; number < start + range; number++)
+            if (this.isPrime(number))
+                results['isPrime'].push(number);
+        let timeEnd = performance.now();
+        console.log(`[Primes] isPrime() ${results['isPrime'].length} in ${Math.floor(timeEnd - timeStart)}ms`);
+
+        timeStart = performance.now();
+        for (let number = start; number < start + range; number++)
+            if (isPrimeTest(number))
+                results['isPrimeTest'].push(number);
+        timeEnd = performance.now();
+        console.log(`[Primes] isPrimeTest() ${results['isPrimeTest'].length} in ${Math.floor(timeEnd - timeStart)}ms`);
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+    #inSmallPrimes(number) {
+        if (number > this.#smallPrimesLast)
+            return false;
+        for (let i = 0; i < this.#smallPrimesSize; i++)
+            if (number == this.#smallPrimes[i])
+                return true;
+        return false;
+    }
+
+
 
     #generateSmallPrimes(range) {
         const timeStart = performance.now();
