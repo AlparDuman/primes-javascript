@@ -178,9 +178,7 @@ class Primes {
 
         get(number) {
             const mask = this.#mask[number % 30];
-            if (mask != 0)
-                return (this.#field[Math.floor(number / 30)] & mask) == 0
-            return false;
+            return mask != 0 ? ((this.#field[Math.trunc(number / 30)] & mask) == 0) : false;
         }
 
     }
