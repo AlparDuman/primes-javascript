@@ -150,7 +150,7 @@ class Primes {
                 primes.push(number);
 
         const timeEnd = performance.now();
-        console.log(`Prepared ${primes.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
+        console.log(`[Primes] Prepared ${primes.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
         return primes;
     }
 
@@ -161,7 +161,7 @@ class Primes {
 
         constructor(size) {
             if (!Number.isInteger(size) || size < 1)
-                throw new Error(`Bitarray expects the type of the argument to be Integer, but ${typeof size} was given.`);
+                throw new Error(`[Primes] Bitarray expects the type of the argument to be Integer, but ${typeof size} was given.`);
             this.#mask = [0, 0x1, 0, 0, 0, 0, 0, 0x2, 0, 0, 0, 0x4, 0, 0x8, 0, 0, 0, 0x10, 0, 0x20, 0, 0, 0, 0x40, 0, 0, 0, 0, 0, 0x80];
             this.#field = new Uint8Array(Math.floor(size / 30) + 1);
             this.size = size;
