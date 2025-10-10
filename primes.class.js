@@ -21,10 +21,12 @@ class Primes {
 
     #smallPrimes;
     #smallPrimesLast;
+    #smallPrimesSize;
 
     constructor() {
         this.#smallPrimes = this.#generateSmallPrimes(Number.MAX_SAFE_INTEGER);
         this.#smallPrimesLast = this.#smallPrimes.at(-1);
+        this.#smallPrimesSize = this.#smallPrimes.length;
     }
 
     isPrime(number) {
