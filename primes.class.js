@@ -60,7 +60,7 @@ class Primes {
         function isPrimeTest(number) {
             if (!Number.isInteger(number) || number < 2 || number != 2 && number % 2 == 0)
                 return false;
-            const limit = Math.floor(Math.sqrt(number));
+            const limit = Math.trunc(Math.sqrt(number));
             for (let divisor = 3; divisor <= limit; divisor += 2)
                 if (number % divisor == 0)
                     return false;
@@ -90,19 +90,19 @@ class Primes {
         const results = { isPrime: [], isPrimeTest: [], countPrimes: 0, countPrimeTest: 0, getPrimes: [], getPrimesTest: [] };
 
 
-        let timeStart = performance.now();
+        /*/let timeStart = performance.now();
         for (let number = start; number < start + range; number++)
             if (this.isPrime(number))
                 results['isPrime'].push(number);
         let timeEnd = performance.now();
-        console.log(`[Primes] isPrime() ${results['isPrime'].length} in ${Math.floor(timeEnd - timeStart)}ms`);
+        console.log(`[Primes] isPrime() ${results['isPrime'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
 
         timeStart = performance.now();
         for (let number = start; number < start + range; number++)
             if (isPrimeTest(number))
                 results['isPrimeTest'].push(number);
         timeEnd = performance.now();
-        console.log(`[Primes] isPrimeTest() ${results['isPrimeTest'].length} in ${Math.floor(timeEnd - timeStart)}ms`);
+        console.log(`[Primes] isPrimeTest() ${results['isPrimeTest'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);/*/
 
 
 
@@ -130,9 +130,9 @@ class Primes {
     #generateSmallPrimes(range) {
         const timeStart = performance.now();
 
-        range = Math.floor(Math.sqrt(range));
+        range = Math.trunc(Math.sqrt(range));
         const field = new Primes.BitArray(range);
-        const limit = Math.floor(Math.sqrt(range));
+        const limit = Math.trunc(Math.sqrt(range));
         let primes = [];
         let number = 7;
 
@@ -166,14 +166,14 @@ class Primes {
             if (!Number.isInteger(size) || size < 1)
                 throw new Error(`[Primes] Bitarray expects the type of the argument to be Integer, but ${typeof size} was given.`);
             this.#mask = [0, 0x1, 0, 0, 0, 0, 0, 0x2, 0, 0, 0, 0x4, 0, 0x8, 0, 0, 0, 0x10, 0, 0x20, 0, 0, 0, 0x40, 0, 0, 0, 0, 0, 0x80];
-            this.#field = new Uint8Array(Math.floor(size / 30) + 1);
+            this.#field = new Uint8Array(Math.trunc(size / 30) + 1);
             this.size = size;
         }
 
         set(number) {
             const mask = this.#mask[number % 30];
             if (mask != 0)
-                this.#field[Math.floor(number / 30)] |= mask;
+                this.#field[Math.trunc(number / 30)] |= mask;
         }
 
         get(number) {
