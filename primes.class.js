@@ -112,18 +112,6 @@ class Primes {
 
     }
 
-
-    #inSmallPrimes(number) {
-        if (number > this.#smallPrimesLast)
-            return false;
-        for (let i = 0; i < this.#smallPrimesSize; i++)
-            if (number == this.#smallPrimes[i])
-                return true;
-        return false;
-    }
-
-
-
     #generateSmallPrimes(range) {
         const timeStart = performance.now();
 
