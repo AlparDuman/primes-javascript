@@ -32,9 +32,12 @@ class Primes {
     isPrime(number) {
         if (!Number.isInteger(number) || number < 2)
             return false;
-        for (const prime of this.#smallPrimes)
-            if (number % prime == 0)
-                return number == prime;
+        if (number <= this.#smallPrimesLast) {
+            return this.#inSmallPrimes(number);
+        } else
+            for (let i = 0; i < this.#smallPrimesSize; i++)
+                if (!(number % this.#smallPrimes[i]))
+                    return number == this.#smallPrimes[i];
         return true;
     }
 
