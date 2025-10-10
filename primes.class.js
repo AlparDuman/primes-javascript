@@ -42,7 +42,15 @@ class Primes {
         return this.getPrimes(range, start).length;
     }
 
-    getPrimes(range, start = 0) { }
+    getPrimes(range, start = 0) {
+        if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
+            return [];
+        let primes = [];
+        for (let n = start; n < start + range; n++)
+            if (this.isPrime(n))
+                primes.push(n);
+        return primes;
+    }
 
     selfTest() { }
 
