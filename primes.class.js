@@ -87,7 +87,7 @@ class Primes {
         const results = { isPrime: [], isPrimeTest: [], countPrimes: 0, countPrimeTest: 0, getPrimes: [], getPrimesTest: [] };
 
 
-        /*/let timeStart = performance.now();
+        /**/let timeStart = performance.now();
         for (let number = start; number < start + range; number++)
             if (this.isPrime(number))
                 results['isPrime'].push(number);
@@ -99,7 +99,7 @@ class Primes {
             if (isPrimeTest(number))
                 results['isPrimeTest'].push(number);
         timeEnd = performance.now();
-        console.log(`[Primes] isPrimeTest() ${results['isPrimeTest'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);/*/
+        console.log(`[Primes] isPrimeTest() ${results['isPrimeTest'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);/**/
 
 
 
