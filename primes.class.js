@@ -147,6 +147,30 @@ class Primes {
         return defragment;
     }
 
+    #bucketSieve(range, start = 0) {
+        const field = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return field;
+    }
+
     static BitArray = class {
 
         #mask;
