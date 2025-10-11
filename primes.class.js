@@ -138,9 +138,11 @@ class Primes {
             if (field.get(number))
                 primes.push(number);
 
+        const defragment = primes.slice();
+
         const timeEnd = performance.now();
         console.log(`[Primes] Prepared ${primes.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
-        return primes;
+        return defragment;
     }
 
     static BitArray = class {
