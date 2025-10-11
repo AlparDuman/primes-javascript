@@ -156,7 +156,7 @@ class Primes {
                 throw new Error(`[Primes] Bitarray expects the type of the argument to be Integer, but ${typeof size} was given.`);
             this.#mask = [0, 0x1, 0, 0, 0, 0, 0, 0x2, 0, 0, 0, 0x4, 0, 0x8, 0, 0, 0, 0x10, 0, 0x20, 0, 0, 0, 0x40, 0, 0, 0, 0, 0, 0x80];
             this.#field = new Uint8Array(Math.trunc(size / 30) + 1);
-            this.size = size;
+            this.#reciprocal30 = 1 / 30;
         }
 
         set(number) {
