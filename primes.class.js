@@ -60,12 +60,29 @@ class Primes {
     getPrimes(range, start = 0) {
         if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
             return [];
+        const field = this.#bucketSieve(range, start);
+        const primes = [];
+
+        if (start <= 2 && start + range >= 2) primes.push(2);
+        if (start <= 3 && start + range >= 3) primes.push(3);
+        if (start <= 5 && start + range >= 5) primes.push(5);
+
+        for (const pack of field)
+            for (const demask in this.#demask)
+                if (field[pack] & demask == 1)
+                    primes.push(pack * 30 + this.#demask[demask]);
+        return primes;
+    }
+
+    /*/getPrimes(range, start = 0) {
+        if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
+            return [];
         let primes = start <= 2 && start + range >= 2 ? [2] : [];
         for (let number = start % 2 == 1 ? start : ++start; number <= start + range; number += 2)
             if (this.isPrime(number))
                 primes.push(number);
         return primes;
-    }
+    }/**/
 
     test() {
 
