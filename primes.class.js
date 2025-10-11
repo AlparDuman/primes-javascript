@@ -22,11 +22,13 @@ class Primes {
     #smallPrimes;
     #smallPrimesLast;
     #smallPrimesSize;
+    #demask;
 
     constructor() {
         this.#smallPrimes = this.#generateSmallPrimes(Number.MAX_SAFE_INTEGER);
         this.#smallPrimesLast = this.#smallPrimes.at(-1);
         this.#smallPrimesSize = this.#smallPrimes.length;
+        this.#demask = { 0x1: 1, 0x2: 7, 0x4: 11, 0x8: 13, 0x10: 17, 0x20: 19, 0x40: 23, 0x80: 29 };
     }
 
     isPrime(number) {
