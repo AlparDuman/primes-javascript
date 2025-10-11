@@ -45,10 +45,10 @@ class Primes {
     getPrimes(range, start = 0) {
         if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
             return [];
-        let primes = [];
-        for (let n = start; n < start + range; n++)
-            if (this.isPrime(n))
-                primes.push(n);
+        let primes = start >= 2 ? [2] : [];
+        for (let number = start % 2 == 1 ? start : ++start; number < start + range; number += 2)
+            if (this.isPrime(number))
+                primes.push(number);
         return primes;
     }
 
