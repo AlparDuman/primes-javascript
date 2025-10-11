@@ -54,7 +54,7 @@ class Primes {
 
     selfTest() {
 
-        function isPrimeTest(number) {
+        function isTest(number) {
             if (!Number.isInteger(number) || number < 2 || number != 2 && number % 2 == 0)
                 return false;
             const limit = Math.trunc(Math.sqrt(number));
@@ -64,17 +64,17 @@ class Primes {
             return true;
         }
 
-        function countPrimesTest(range, start = 0) {
-            return getPrimesTest(range, start);
+        function countTest(range, start = 0) {
+            return getTest(range, start);
         }
 
-        function getPrimesTest(range, start = 0) {
+        function getTest(range, start = 0) {
             if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
                 return [];
             const end = start + range;
             let primes = start <= 2 && end >= 2 ? [2] : [];
             for (let number = start % 2 == 1 ? start : ++start; number <= end; number += 2)
-                if (isPrimeTest(number))
+                if (isTest(number))
                     primes.push(number);
             return primes;
         }
@@ -84,24 +84,25 @@ class Primes {
         console.log('[Primes] Self testing ...');
         const start = 0;
         const range = 1e5;
-        const results = { isPrime: [], isPrimeTest: [], countPrimes: 0, countPrimeTest: 0, getPrimes: [], getPrimesTest: [] };
+        const results = { isPrime: [], isTest: [], countPrimes: 0, countTest: 0, getPrimes: [], getTest: [] };
 
-
-        /**/let timeStart = performance.now();
+        // test isPrime()
+        let timeStart = performance.now();
         for (let number = start; number < start + range; number++)
             if (this.isPrime(number))
                 results['isPrime'].push(number);
         let timeEnd = performance.now();
         console.log(`[Primes] isPrime() ${results['isPrime'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
 
+        // test isTest
         timeStart = performance.now();
         for (let number = start; number < start + range; number++)
-            if (isPrimeTest(number))
-                results['isPrimeTest'].push(number);
+            if (isTest(number))
+                results['isTest'].push(number);
         timeEnd = performance.now();
-        console.log(`[Primes] isPrimeTest() ${results['isPrimeTest'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);/**/
+        console.log(`[Primes] isTest() ${results['isTest'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
 
-
+        // 
 
 
 
