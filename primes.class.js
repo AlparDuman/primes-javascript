@@ -52,7 +52,7 @@ class Primes {
         return primes;
     }
 
-    selfTest() {
+    test() {
 
         function isTest(number) {
             if (!Number.isInteger(number) || number < 2 || number != 2 && number % 2 == 0)
@@ -79,37 +79,39 @@ class Primes {
             return primes;
         }
 
-
-
-        console.log('[Primes] Self testing ...');
         const start = 0;
         const range = 1e5;
         const results = { isPrime: [], isTest: [], countPrimes: 0, countTest: 0, getPrimes: [], getTest: [] };
 
-        // test isPrime()
-        let timeStart = performance.now();
-        for (let number = start; number < start + range; number++)
-            if (this.isPrime(number))
-                results['isPrime'].push(number);
-        let timeEnd = performance.now();
-        console.log(`[Primes] isPrime() ${results['isPrime'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
-
-        // test isTest
-        timeStart = performance.now();
-        for (let number = start; number < start + range; number++)
-            if (isTest(number))
-                results['isTest'].push(number);
-        timeEnd = performance.now();
-        console.log(`[Primes] isTest() ${results['isTest'].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
-
-        // 
-
-
-
-
-
-
-
+        for (const select in results) {
+            const timeStart = performance.now();
+            switch (select) {
+                case 'isPrime':
+                    for (let number = start; number < start + range; number++)
+                        if (this.isPrime(number))
+                            results[select].push(number);
+                    break;
+                case 'isTest':
+                    for (let number = start; number < start + range; number++)
+                        if (isTest(number))
+                            results[select].push(number);
+                    break;
+                case 'countPrimes':
+                    results[select] = this.countPrimes(range, start);
+                    break;
+                case 'countTest':
+                    results[select] = countTest(range, start);
+                    break;
+                case 'getPrimes':
+                    results[select] = this.getPrimes(range, start);
+                    break;
+                case 'getTest':
+                    results[select] = getTest(range, start);
+                    break;
+            }
+            const timeEnd = performance.now();
+            console.log(`[Primes] Test: ${(`${select}()`).padEnd(13, ' ')} ${typeof results[select] == 'number' ? results[select] : results[select].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
+        }
 
     }
 
