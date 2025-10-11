@@ -149,6 +149,7 @@ class Primes {
 
         #mask;
         #field;
+        #reciprocal30;
 
         constructor(size) {
             if (!Number.isInteger(size) || size < 1)
@@ -160,13 +161,12 @@ class Primes {
 
         set(number) {
             const mask = this.#mask[number % 30];
-            if (mask != 0)
-                this.#field[Math.trunc(number / 30)] |= mask;
+            if (mask != 0) this.#field[Math.trunc(number * this.#reciprocal30)] |= mask;
         }
 
         get(number) {
             const mask = this.#mask[number % 30];
-            return mask != 0 ? ((this.#field[Math.trunc(number / 30)] & mask) == 0) : false;
+            return mask != 0 ? ((this.#field[Math.trunc(number * this.#reciprocal30)] & mask) == 0) : false;
         }
 
     }
