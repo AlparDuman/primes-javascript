@@ -41,7 +41,20 @@ class Primes {
     }
 
     countPrimes(range, start = 0) {
-        return this.getPrimes(range, start).length;
+        if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
+            return [];
+        const field = this.#bucketSieve(range, start);
+        let count = 0;
+
+        if (start <= 2 && start + range >= 2) count++;
+        if (start <= 3 && start + range >= 3) count++;
+        if (start <= 5 && start + range >= 5) count++;
+
+        for (const encoded of field)
+            for (const demask in this.#demask)
+                if (encoded & demask == 1)
+                    count++;
+        return count;
     }
 
     getPrimes(range, start = 0) {
