@@ -130,6 +130,9 @@ class Primes {
             }
             const timeEnd = performance.now();
             console.log(`[Primes] Test: ${(`${select}()`).padEnd(13, ' ')} ${typeof results[select] == 'number' ? results[select] : results[select].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
+
+            if (typeof results[select] != 'number')
+                console.log(results[select].slice(0, 10), results[select].slice(-10));
         }
 
     }
