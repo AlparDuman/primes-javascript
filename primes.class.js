@@ -56,17 +56,37 @@ class Primes {
         }
 
         const field = this.#bucketSieve(range, start);
+        const sizeField = field.length;
+        const limit = start + range;
+        const shift = Math.trunc(start / 30) * 30;
         const primes = [];
+        let i = 0;
 
         if (start <= 2 && start + range >= 2) primes.push(2);
         if (start <= 3 && start + range >= 3) primes.push(3);
         if (start <= 5 && start + range >= 5) primes.push(5);
 
-        for (const byte of field)
+        console.log(field[i]);
+
+        if (start <= 5) {
+            const byte = field[i];
+
             if (byte != 0)
                 for (const demask in this.#demask)
-                    if ((byte & demask) == 0)
-                        primes.push(byte * 30 + this.#demask[demask]);
+                    if (this.#demask[demask] >= 5 && (byte & demask) == 0)
+                        primes.push(shift + this.#demask[demask]);
+
+            i++;
+        }
+
+        for (; i < sizeField; i++)
+            if (field[i] != 0)
+                for (const demask in this.#demask)
+                    if ((field[i] & demask) == 0) {
+                        const prime = shift + i * 30 + this.#demask[demask];
+                        if (prime <= limit)
+                            primes.push(prime);
+                    }
 
         return primes;
     }
