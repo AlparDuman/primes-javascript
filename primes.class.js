@@ -214,6 +214,10 @@ class Primes {
             return mask != 0 ? ((this.#field[Math.trunc(number * this.#reciprocal30)] & mask) == 0) : false;
         }
 
+        getField() {
+            return this.#field;
+        }
+
     }
 
 }
