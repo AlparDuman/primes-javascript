@@ -175,7 +175,9 @@ class Primes {
         for (let i = 0; i < this.#smallPrimesSize; i++) {
             prime = this.#smallPrimes[i];
             step = prime * 2;
-            multiple = prime + step;
+            multiple = prime * Math.ceil(start / prime);
+            if (multiple > limit)
+                break;
             for (; multiple <= limit; multiple += step)
                 field.set(multiple - shift);
         }
