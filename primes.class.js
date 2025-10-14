@@ -182,7 +182,6 @@ class Primes {
                 field.set(multiple - shift);
         }
 
-        console.log(field.getField());
         return field.getField();
     }
 
