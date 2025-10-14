@@ -230,3 +230,6 @@ class Primes {
     }
 
 }
+
+const classPrimes = new Primes();
+classPrimes.test();
