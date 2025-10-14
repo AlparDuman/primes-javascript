@@ -175,27 +175,22 @@ class Primes {
     }
 
     #bucketSieve(range, start = 0) {
-        const field = [];
+        const field = new Primes.BitArray(range);
+        const limit = start + range;
+        let offset = Math.trunc(start / 30) * 30;
+        let prime, multiple, step;
 
+        for (let i = 0; i < this.#smallPrimesSize; i++) {
+            prime = this.#smallPrimes[i];
+            step = prime * 2;
+            multiple = prime + step;
+            for (; multiple <= limit; multiple += step)
+                if (multiple >= start)
+                    field.set(multiple - offset);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        return field;
+        console.log(field.getField());
+        return field.getField();
     }
 
     static BitArray = class {
