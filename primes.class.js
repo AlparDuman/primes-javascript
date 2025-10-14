@@ -47,6 +47,14 @@ class Primes {
     getPrimes(range, start = 0) {
         if (!Number.isInteger(range) || !Number.isInteger(start) || range < 1 || start + range < 2)
             return [];
+
+        if (start < 0) {
+            range -= abs(start);
+            start = 0;
+            if (range < 1)
+                return [];
+        }
+
         const field = this.#bucketSieve(range, start);
         const primes = [];
 
