@@ -97,7 +97,7 @@ class Primes {
         }
 
         function countTest(range, start = 0) {
-            return getTest(range, start);
+            return getTest(range, start).length;
         }
 
         function getTest(range, start = 0) {
