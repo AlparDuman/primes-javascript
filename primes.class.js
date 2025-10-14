@@ -175,7 +175,7 @@ class Primes {
         const defragment = primes.slice();
 
         const timeEnd = performance.now();
-        console.log(`[Primes] Prepared ${primes.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
+        console.log(`[Primes] Prepared ${defragment.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
         return defragment;
     }
 
