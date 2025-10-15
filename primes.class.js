@@ -109,7 +109,8 @@ class Primes {
 
         const start = 0;
         const range = 1e5;
-        const results = { isPrime: [], isTest: [], countPrimes: 0, countTest: 0, getPrimes: [], getTest: [] };
+        const results = { countPrimes: 0, countTest: 0, isPrime: [], isTest: [], getPrimes: [], getTest: [] };
+        console.log('[Primes|Test] Get result of methods from', start, 'to', start + range);
 
         for (const select in results) {
             const timeStart = performance.now();
@@ -138,10 +139,12 @@ class Primes {
                     break;
             }
             const timeEnd = performance.now();
-            console.log(`[Primes] Test: ${(`${select}()`).padEnd(13, ' ')} ${typeof results[select] == 'number' ? results[select] : results[select].length} in ${Math.trunc(timeEnd - timeStart)}ms`);
 
-            if (typeof results[select] != 'number')
-                console.log(results[select].slice(0, 10), results[select].slice(-10));
+            let messageIntro = `[Primes|Test] ${(`${select}()`).padEnd(13, ' ')}`;
+            if (typeof results[select] == 'number')
+                console.log(`${messageIntro} count`, results[select], 'primes in', Math.trunc(timeEnd - timeStart), 'ms');
+            else
+                console.log(`${messageIntro} found`, results[select].length, 'primes', results[select].slice(0, 5), results[select].slice(-5), 'primes in', Math.trunc(timeEnd - timeStart), 'ms');
         }
 
     }
@@ -174,7 +177,7 @@ class Primes {
         const defragment = primes.slice();
 
         const timeEnd = performance.now();
-        console.log(`[Primes] Prepared ${defragment.length} small primes in ${Math.ceil(timeEnd - timeStart)}ms`);
+        console.log('[Primes] Prepared', defragment.length, 'small primes in', Math.ceil(timeEnd - timeStart), 'ms');
         return defragment;
     }
 
