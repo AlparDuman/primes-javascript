@@ -192,13 +192,14 @@ class Primes {
     #bucketSieve(range, start = 0) {
         const field = new Primes.BitArray(range);
         const limit = start + range;
-        let prime, multiple, step;
         let shift = Math.floor(start / 30);
+        let prime, multiplier, multiple, step;
 
-        for (let i = 0; i < this.#smallPrimesSize; i++) {
+        for (let i = 1; i < this.#smallPrimesSize; i++) {
             prime = this.#smallPrimes[i];
             step = prime * 2;
-            multiple = prime * Math.ceil(start / prime);
+            multiplier = Math.ceil(start / prime);
+            multiple = multiplier > 1 ? prime * multiplier : prime * 3;
             if (multiple > limit)
                 break;
             for (; multiple <= limit; multiple += step)
