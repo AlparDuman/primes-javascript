@@ -58,7 +58,7 @@ class Primes {
         const field = this.#bucketSieve(range, start);
         const sizeField = field.length;
         const limit = start + range;
-        const shift = Math.trunc(start / 30) * 30;
+        const shift = Math.floor(start / 30);
         const primes = [];
         let i = 0;
 
@@ -192,8 +192,8 @@ class Primes {
     #bucketSieve(range, start = 0) {
         const field = new Primes.BitArray(range);
         const limit = start + range;
-        let shift = Math.trunc(start / 30) * 30;
         let prime, multiple, step;
+        let shift = Math.floor(start / 30);
 
         for (let i = 0; i < this.#smallPrimesSize; i++) {
             prime = this.#smallPrimes[i];
