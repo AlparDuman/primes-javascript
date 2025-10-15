@@ -55,29 +55,7 @@ class Primes {
                 return [];
         }
 
-        const field = this.#bucketSieve(range, start);
-        const sizeField = field.length;
-        const limit = start + range;
-        const shift = Math.floor(start / 30);
-        const primes = [];
-        let i = 0;
-
-        if (start <= 2 && start + range >= 2) primes.push(2);
-        if (start <= 3 && start + range >= 3) primes.push(3);
-        if (start <= 5 && start + range >= 5) primes.push(5);
-
-        iField: for (; i < sizeField; i++)
-            for (const demask in this.#demask)
-                if ((field[i] & demask) == 0) {
-                    const prime = shift + i * 30 + this.#demask[demask];
-                    if (prime <= 5)
-                        continue;
-                    if (prime > limit)
-                        break iField;
-                    primes.push(prime);
-                }
-
-        return primes;
+        return this.#getPrimesSegment(range, start);
     }
 
     test() {
@@ -181,7 +159,33 @@ class Primes {
         return defragment;
     }
 
-    #bucketSieve(range, start = 0) {
+    #getPrimesSegment(range, start = 0) {
+        const field = this.#segmentSieve(range, start);
+        const sizeField = field.length;
+        const limit = start + range;
+        const shift = Math.floor(start / 30);
+        const primes = [];
+        let i = 0;
+
+        if (start <= 2 && start + range >= 2) primes.push(2);
+        if (start <= 3 && start + range >= 3) primes.push(3);
+        if (start <= 5 && start + range >= 5) primes.push(5);
+
+        iField: for (; i < sizeField; i++)
+            for (const demask in this.#demask)
+                if ((field[i] & demask) == 0) {
+                    const prime = shift + i * 30 + this.#demask[demask];
+                    if (prime <= 5)
+                        continue;
+                    if (prime > limit)
+                        break iField;
+                    primes.push(prime);
+                }
+
+        return primes;
+    }
+
+    #segmentSieve(range, start = 0) {
         const field = new Primes.BitArray(range);
         const limit = start + range;
         let shift = Math.floor(start / 30);
