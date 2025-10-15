@@ -66,27 +66,16 @@ class Primes {
         if (start <= 3 && start + range >= 3) primes.push(3);
         if (start <= 5 && start + range >= 5) primes.push(5);
 
-        console.log(field[i]);
-
-        if (start <= 5) {
-            const byte = field[i];
-
-            if (byte != 0)
-                for (const demask in this.#demask)
-                    if (this.#demask[demask] >= 5 && (byte & demask) == 0)
-                        primes.push(shift + this.#demask[demask]);
-
-            i++;
-        }
-
-        for (; i < sizeField; i++)
-            if (field[i] != 0)
-                for (const demask in this.#demask)
-                    if ((field[i] & demask) == 0) {
-                        const prime = shift + i * 30 + this.#demask[demask];
-                        if (prime <= limit)
-                            primes.push(prime);
-                    }
+        iField: for (; i < sizeField; i++)
+            for (const demask in this.#demask)
+                if ((field[i] & demask) == 0) {
+                    const prime = shift + i * 30 + this.#demask[demask];
+                    if (prime <= 5)
+                        continue;
+                    if (prime > limit)
+                        break iField;
+                    primes.push(prime);
+                }
 
         return primes;
     }
